@@ -24,8 +24,9 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
         List<FieldError> fieldErrors = manvException.getBindingResult().getFieldErrors();
         String fields = fieldErrors.stream().map(FieldError::getField).collect(Collectors.joining(","));
         String fieldMessages = fieldErrors.stream().map(FieldError::getDefaultMessage).collect(Collectors.joining(","));
-        ValidationError veDetails = ValidationError.Builder
-                .newBuilder()
+
+        ValidationError details = ValidationError.Builder
+                .newInstance()
                 .timestamp(new Date().getTime())
                 .status(HttpStatus.BAD_REQUEST.value())
                 .title("Field Validation Error")
@@ -34,7 +35,8 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
                 .field(fields)
                 .fieldMessage(fieldMessages)
                 .build();
-        return new ResponseEntity<>(veDetails, HttpStatus.BAD_REQUEST);
+
+        return new ResponseEntity<>(details, HttpStatus.BAD_REQUEST);
     }
 
 }

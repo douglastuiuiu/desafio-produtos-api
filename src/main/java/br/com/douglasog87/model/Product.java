@@ -4,9 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -15,9 +13,11 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = -2475998499776498054L;
 
     @Id
     private String id;
@@ -37,8 +37,8 @@ public class Product implements Serializable {
                 ", name='" + name + '\'' +
                 ", kind='" + kind + '\'' +
                 ", manufacturer='" + manufacturer + '\'' +
-                ", createAt='" + createAt + '\'' +
-                ", updateAt='" + updateAt + '\'' +
+                ", createAt='" + createdAt + '\'' +
+                ", updateAt='" + updatedAt + '\'' +
                 '}';
     }
 }
