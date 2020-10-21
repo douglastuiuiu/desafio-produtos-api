@@ -1,3 +1,5 @@
+#PRODUCTS-API
+
 A idéia era simular a integração de uma API com outra porém sem a necessidade de informar para a API que detém a informação original, quais as outras APIs que querem receber as notificações e dados originários da API de origem.
 
 Como implementação técnica, utilizei spring-boot para APIs e RabbitMQ para implementar o padrão de event-sourcing.
