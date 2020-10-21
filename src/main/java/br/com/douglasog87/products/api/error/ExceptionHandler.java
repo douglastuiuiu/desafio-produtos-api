@@ -1,4 +1,4 @@
-package br.com.douglasog87.api.error;
+package br.com.douglasog87.products.api.error;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

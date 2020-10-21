@@ -1,6 +1,6 @@
-package br.com.douglasog87.api.repository;
+package br.com.douglasog87.products.api.repository;
 
-import br.com.douglasog87.api.model.Product;
+import br.com.douglasog87.products.api.model.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

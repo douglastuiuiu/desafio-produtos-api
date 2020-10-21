@@ -1,4 +1,4 @@
-package br.com.douglasog87.event.consumer;
+package br.com.douglasog87.products.event.consumer;
 
 import br.com.douglasog87.consumer.EventConsumerConfig;
 import lombok.Getter;

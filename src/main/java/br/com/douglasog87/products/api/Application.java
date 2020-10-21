@@ -1,4 +1,4 @@
-package br.com.douglasog87.api;
+package br.com.douglasog87.products.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

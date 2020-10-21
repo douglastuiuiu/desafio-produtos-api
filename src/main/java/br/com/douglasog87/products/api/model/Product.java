@@ -1,4 +1,4 @@
-package br.com.douglasog87.api.model;
+package br.com.douglasog87.products.api.model;
 
 import lombok.*;
 

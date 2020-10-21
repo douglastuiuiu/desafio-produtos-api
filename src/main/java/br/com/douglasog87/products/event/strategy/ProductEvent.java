@@ -1,4 +1,4 @@
-package br.com.douglasog87.event.strategy;
+package br.com.douglasog87.products.event.strategy;
 
 import br.com.douglasog87.domain.Payload;
 import br.com.douglasog87.event.DomainEvent;
