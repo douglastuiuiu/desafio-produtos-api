@@ -21,10 +21,6 @@ public class Product implements Payload {
     String manufacturer;
     LocalDateTime createdAt, updatedAt;
 
-    @JsonPOJOBuilder(withPrefix = "")
-    public static class Builder {
-    }
-
     public static Product parseProduct(br.com.douglasog87.api.model.Product product) {
         return Product.builder()
                 .id(product.getId())
@@ -46,6 +42,10 @@ public class Product implements Payload {
                 ", createAt='" + createdAt + '\'' +
                 ", updateAt='" + updatedAt + '\'' +
                 '}';
+    }
+
+    @JsonPOJOBuilder(withPrefix = "")
+    public static class Builder {
     }
 
 }

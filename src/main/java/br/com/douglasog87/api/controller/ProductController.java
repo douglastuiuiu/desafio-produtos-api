@@ -1,19 +1,18 @@
 package br.com.douglasog87.api.controller;
 
-import java.time.LocalDateTime;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
+import br.com.douglasog87.api.repository.ProductRepository;
 import br.com.douglasog87.event.DomainEvent;
 import br.com.douglasog87.event.domain.Product;
 import br.com.douglasog87.event.strategy.ProductEvent;
-import br.com.douglasog87.api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
@@ -32,7 +31,7 @@ public class ProductController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> findOne(@PathVariable("id") String id) {
         Optional<br.com.douglasog87.api.model.Product> product = repository.findById(id);
-        if(!product.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (!product.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(repository.findById(id), HttpStatus.OK);
     }
 
@@ -51,7 +50,7 @@ public class ProductController {
     public ResponseEntity<?> update(@PathVariable("id") String id, @Valid @RequestBody br.com.douglasog87.api.model.Product product) {
         Optional<br.com.douglasog87.api.model.Product> productBD = repository.findById(id);
         product.setId(id);
-        if(productBD.isPresent()) {
+        if (productBD.isPresent()) {
             product.setUpdatedAt(LocalDateTime.now());
             product.setCreatedAt(productBD.get().getCreatedAt());
         }
@@ -66,7 +65,7 @@ public class ProductController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") String id) {
         Optional<br.com.douglasog87.api.model.Product> productBD = repository.findById(id);
-        if(productBD.isPresent()) {
+        if (productBD.isPresent()) {
             DomainEvent event = ProductEvent.DELETE.newInstance(Product.parseProduct(productBD.get()));
             applicationEventPublisher.publishEvent(event);
             repository.deleteById(id);

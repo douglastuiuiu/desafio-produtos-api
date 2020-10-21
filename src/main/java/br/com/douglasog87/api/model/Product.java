@@ -1,11 +1,10 @@
 package br.com.douglasog87.api.model;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
-
-import lombok.*;
-
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
