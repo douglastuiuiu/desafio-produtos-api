@@ -1,14 +1,14 @@
-package br.com.douglasog87.products.api.controller;
+package br.com.douglasog87.api.controller;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
-import br.com.douglasog87.commonsevent.event.DomainEvent;
-import br.com.douglasog87.products.api.model.Product;
-import br.com.douglasog87.products.api.repository.ProductRepository;
-import br.com.douglasog87.products.event.strategy.ProductEvent;
+import br.com.douglasog87.event.DomainEvent;
+import br.com.douglasog87.event.domain.Product;
+import br.com.douglasog87.event.strategy.ProductEvent;
+import br.com.douglasog87.api.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
@@ -31,16 +31,16 @@ public class ProductController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> findOne(@PathVariable("id") String id) {
-        Optional<Product> product = repository.findById(id);
+        Optional<br.com.douglasog87.api.model.Product> product = repository.findById(id);
         if(!product.isPresent()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(repository.findById(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> insert(@Valid @RequestBody Product product) {
+    public ResponseEntity<?> insert(@Valid @RequestBody br.com.douglasog87.api.model.Product product) {
         product.setCreatedAt(LocalDateTime.now());
 
-        DomainEvent event = ProductEvent.CREATE.newInstance(br.com.douglasog87.products.event.domain.Product.parseProduct(product));
+        DomainEvent event = ProductEvent.CREATE.newInstance(Product.parseProduct(product));
         product = repository.save(product);
         applicationEventPublisher.publishEvent(event);
 
@@ -48,15 +48,15 @@ public class ProductController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") String id, @Valid @RequestBody Product product) {
-        Optional<Product> productBD = repository.findById(id);
+    public ResponseEntity<?> update(@PathVariable("id") String id, @Valid @RequestBody br.com.douglasog87.api.model.Product product) {
+        Optional<br.com.douglasog87.api.model.Product> productBD = repository.findById(id);
         product.setId(id);
         if(productBD.isPresent()) {
             product.setUpdatedAt(LocalDateTime.now());
             product.setCreatedAt(productBD.get().getCreatedAt());
         }
 
-        DomainEvent event = ProductEvent.UPDATE.newInstance(br.com.douglasog87.products.event.domain.Product.parseProduct(product));
+        DomainEvent event = ProductEvent.UPDATE.newInstance(Product.parseProduct(product));
         product = repository.save(product);
         applicationEventPublisher.publishEvent(event);
 
@@ -65,9 +65,9 @@ public class ProductController {
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") String id) {
-        Optional<Product> productBD = repository.findById(id);
+        Optional<br.com.douglasog87.api.model.Product> productBD = repository.findById(id);
         if(productBD.isPresent()) {
-            DomainEvent event = ProductEvent.DELETE.newInstance(br.com.douglasog87.products.event.domain.Product.parseProduct(productBD.get()));
+            DomainEvent event = ProductEvent.DELETE.newInstance(Product.parseProduct(productBD.get()));
             applicationEventPublisher.publishEvent(event);
             repository.deleteById(id);
         }

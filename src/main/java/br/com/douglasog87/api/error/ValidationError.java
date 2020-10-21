@@ -1,4 +1,4 @@
-package br.com.douglasog87.products.api.error;
+package br.com.douglasog87.api.error;
 
 import lombok.Getter;
 import lombok.Setter;

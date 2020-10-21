@@ -1,9 +1,9 @@
-package br.com.douglasog87.products.event.strategy;
+package br.com.douglasog87.event.strategy;
 
-import br.com.douglasog87.commonsevent.domain.Payload;
-import br.com.douglasog87.commonsevent.event.DomainEvent;
-import br.com.douglasog87.commonsevent.event.EventStrategy;
-import br.com.douglasog87.commonsevent.event.EventType;
+import br.com.douglasog87.domain.Payload;
+import br.com.douglasog87.event.DomainEvent;
+import br.com.douglasog87.event.EventStrategy;
+import br.com.douglasog87.event.EventType;
 
 public enum ProductEvent implements EventType, EventStrategy {
 

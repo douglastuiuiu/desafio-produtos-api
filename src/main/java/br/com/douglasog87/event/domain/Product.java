@@ -1,6 +1,6 @@
-package br.com.douglasog87.products.event.domain;
+package br.com.douglasog87.event.domain;
 
-import br.com.douglasog87.commonsevent.domain.Payload;
+import br.com.douglasog87.domain.Payload;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.Builder;
@@ -25,7 +25,7 @@ public class Product implements Payload {
     public static class Builder {
     }
 
-    public static Product parseProduct(br.com.douglasog87.products.api.model.Product product) {
+    public static Product parseProduct(br.com.douglasog87.api.model.Product product) {
         return Product.builder()
                 .id(product.getId())
                 .name(product.getName())

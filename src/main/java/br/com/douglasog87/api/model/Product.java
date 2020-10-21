@@ -1,4 +1,4 @@
-package br.com.douglasog87.products.api.model;
+package br.com.douglasog87.api.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
